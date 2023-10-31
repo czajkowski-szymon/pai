@@ -10,7 +10,7 @@ nav {
     font-size: 1.5rem;
 }
 
-nav > ul {
+nav>ul {
     gap: 2em;
 }
 
@@ -19,7 +19,7 @@ main {
     background-color: aquamarine;
 }
 
-main > .elements {
+main>.elements {
     background-color: beige;
     width: calc((100vw / 3) * 2);
     display: flex;
@@ -29,7 +29,7 @@ main > .elements {
     padding: 2em;
 }
 
-main > .sidebar {
+main>.sidebar {
     background-color: rgb(255, 230, 210);
     width: calc(100vw / 3);
     align-items: flex-start;
