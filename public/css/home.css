@@ -1,0 +1,140 @@
+nav {
+    position: fixed;
+    width: 100%;
+    background-color: #08A045;
+    color: white;
+    height: 2.5em;
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav>h1 {
+    margin: 0 0.5em;
+    font-size: 1em;
+    font-weight: 100;
+    letter-spacing: 0.3em;
+    text-shadow: 5px 4px 7px rgba(0, 0, 0, 0.25);
+}
+
+nav>a {
+    margin: 0 0.5em;
+    text-decoration: none;
+    color: white;
+    letter-spacing: 0.15em;
+    text-shadow: 5px 4px 7px rgba(0, 0, 0, 0.25);
+}
+
+img {
+    width: 100vw;
+    height: 100vh;
+}
+
+.img-desktop {
+    display: block;
+}
+
+.img-phone {
+    display: none;
+}
+
+.home-text {
+    position: absolute;
+    top: 3em;
+    left: 0.5em;
+    width: 50vw;
+    height: 20vh;
+    color: white;
+}
+
+.home-text>p {
+    margin-bottom: 0.5em;
+    text-shadow: 1px 4px 6px rgba(0, 0, 0, 0.50);
+}
+
+button {
+    margin: 0;
+    padding: 0;
+    width: 40%;
+    font-size: 20px;
+
+    color: #FFF;
+    border-radius: 1.5em;
+    border: 1px solid #08A045;
+    background: #08A045;
+    box-shadow: 2px 4px 7px 0px rgba(0, 0, 0, 0.25);
+
+    line-height: 2.5em;
+    letter-spacing: 0.3em;
+    transition: 0.3s;
+}
+
+.login-button {
+    display: none;
+}
+
+.register-button:hover {
+    transform: translateY(-5px);
+}
+
+@media screen and (max-device-width: 992px) {
+    nav {
+        margin-top: 2em;
+        font-size: 24px;
+        display: flex;
+        justify-content: center;
+    }
+
+    nav>a {
+        display: none;
+    }
+
+    nav>h1 {
+        letter-spacing: .2em;
+        font-size: 30px;
+    }
+
+    .home-text {
+        top: 70%;
+        left: 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .home-text>p {
+        display: none;
+    }
+
+    .home-text>a {
+        width: 80%;
+        text-decoration: none;
+    }
+
+    button {
+        margin-bottom: 1em;
+        width: 80vw;
+    }
+
+    .login-button {
+        display: block;
+        text-decoration: none;
+    }
+
+    .img-desktop {
+        display: none;
+    }
+
+    .img-phone {
+        display: block;
+        width: auto;
+        height: 100%;
+    }
+
+    .container {
+        width: 100%;
+        overflow: hidden;
+    }
+}
