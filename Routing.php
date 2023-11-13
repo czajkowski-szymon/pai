@@ -5,9 +5,19 @@ require_once 'src/controllers/DefaultController.php';
 class Router {
     public static $routes;
 
-    public static function run($path) {
-        $action = explode("/", $path)[0];
-        var_dump($action);
+    public static function get($url, $controller) {
+        self::$routes[$url] = $controller;
+    }
 
+    public static function run($url) {
+        $action = explode('/', $url)[0];
+        
+        if (!array_key_exists($action, self::$routes)) {
+            die('Wrong url!');
+        }
+
+        $controller = self::$routes[$action];
+        $obj = new $controller;
+        $obj->$action();
     }
 }
