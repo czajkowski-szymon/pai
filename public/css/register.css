@@ -1,0 +1,114 @@
+:root {
+    --main-green: #08A045;
+}
+
+body {
+    /* position: fixed; */
+    /* top: 0;
+    left: 0; */
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    font-family: Verdana, sans-serif;
+    font-size: 1.75em;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+}
+
+.header-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    color: var(--main-green);
+    letter-spacing: .3em;
+    text-align: center;
+    margin: 2em 0 1.5em .3em;
+}
+
+.logo {
+    width: 20vw;
+    height: auto;
+    margin-bottom: 1.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo>img {
+    width: 20vw;
+    min-width: 250px;
+}
+
+.register-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+}
+
+form.login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+}
+
+input {
+    font-size: .75em;
+    font-weight: 600;
+
+    width: 95%;
+    line-height: 3em;
+    padding-left: 1em;
+    margin-bottom: 1em;
+
+    border-radius: 30px;
+    border: 1px solid #DADADA;
+    background: #FFF;
+    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.25) inset;
+    color: #9D9D9D;
+}
+
+input:focus {
+    outline: none;
+}
+
+button {
+    font-size: .75em;
+    font-weight: 100;
+
+    width: 100%;
+    line-height: 3em;
+    padding: 0;
+    margin-top: 1em;
+
+    border-radius: 30px;
+    background-color: var(--main-green);
+    color: #FFF;
+    border: none;
+    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.25);
+
+    letter-spacing: .3em;
+}
+
+/* .register-text {
+    font-size: .5em;
+    color: #9D9D9D;
+}
+
+.register-text>a {
+    color: var(--main-green);
+    text-decoration: none;
+} */
