@@ -5,7 +5,9 @@ require_once 'Routing.php';
 $path = trim($_SERVER['REQUEST_URI'], '/');
 $path = parse_url($path, PHP_URL_PATH);
 
-Router::get('login', 'DefaultController');
-Router::get('home', 'DefaultController');
-Router::get('register', 'DefaultController');
-Router::run($path);
+Routing::post('login', 'SecurityController');
+Routing::get('', 'DefaultController');
+Routing::get('home', 'DefaultController');
+Routing::get('register', 'DefaultController');
+Routing::get('discover', 'DefaultController');
+Routing::run($path);

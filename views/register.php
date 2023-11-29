@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="../css/global.css"/> -->
-    <link rel="stylesheet" href="../public/css/login.css">
+    <link rel="stylesheet" href="../public/css/register.css">
     <title>Login page</title>
 </head>
 <body>
@@ -15,13 +15,15 @@
                 <img src="../public/img/logo.svg" alt="Two people running">
             </div>
         </div>
-        <div class="login-container">
-            <form class="login">
+        <div class="register-container">
+            <!-- <p class="header">CREATE ACCOUNT</p> -->
+            <form class="register">
                 <input name="email" type="text" placeholder="Email">
                 <input name="password" type="password" placeholder="Password">
-                <button>LOGIN</button>
+                <input name="password" type="password" placeholder="Confirm Password">
+                <button>REGISTER</button>
             </form>
-            <p class="register-text">Don`t you have account? <a href="#">Sign up</a></p>
+            <!-- <p class="register-text">Don`t you have account? <a href="#">Sign up</a></p> -->
         </div>
     </div>
 </body>
