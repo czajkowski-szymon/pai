@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../public/css/discover.css">
+    <script src="https://kit.fontawesome.com/2310aedf41.js" crossorigin="anonymous"></script>
     <title>Discover</title>
 </head>
 <body>
@@ -78,6 +79,18 @@
                 </div>
             </section>
         </main>
+        <footer>
+            <div class="footer-search-panel">
+                <a href="discover">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </a>
+            </div>
+            <div class="footer-search-panel">
+                <a href="discover">
+                    <i class="fa-solid fa-user"></i>
+                </a>
+            </div>
+        </footer>
     </div>
 </body>
 </html>

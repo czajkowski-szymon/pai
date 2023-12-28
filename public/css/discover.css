@@ -52,6 +52,7 @@ main {
     flex-direction: column;
     width: 80%;
     height: calc(100% - 3em);
+    overflow: auto;
 }
 
 input {
@@ -60,7 +61,7 @@ input {
 
     width: 25%;
     line-height: 1.5em;
-    padding-left: 1em;
+    padding-left: 5%;
     margin: 1em 0;
 
     border-radius: 30px;
@@ -75,7 +76,6 @@ input {
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 2em;
     padding: 0;
-    overflow: auto;
 }
 
 .profile-card {
@@ -136,5 +136,48 @@ input {
     object-fit: cover;
 }
 
+footer {
+    display: none;
+}
 
+@media only screen and (max-device-width: 922px) {
+    .profiles {
+        display: flex;
+        flex-direction: column;
+    }
 
+    nav {
+       display: flex;
+       align-items: center;
+       justify-content: center; 
+    }
+
+    nav .link-panel {
+        display: none;
+    }
+
+    input {
+        padding-right: 0;
+        width: 90%;
+    }
+
+    footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+        line-height: 2em;
+        background-color: var(--main-green);
+        color: white;
+    }
+    
+    footer a {
+        text-decoration: none;
+        color: white;
+    }
+
+    .footer-search-panel {
+        width: 50%;
+        text-align: center;
+    }
+}
