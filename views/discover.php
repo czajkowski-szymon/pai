@@ -11,8 +11,8 @@
         <nav>
             <p class="header">TRAINING BUDDY</p>
             <div class="link-panel">
-                <a href="login" class="login-link">DISCOVER</a>
-                <a href="login" class="login-link">PROFILE</a>
+                <a href="discover" class="discover-link">DISCOVER</a>
+                <a href="#" class="profile-link">PROFILE</a>
             </div>
         </nav>
         <main>
@@ -23,31 +23,57 @@
             </div>
             <section class="profiles">
                 <div class="profile-card">
-                    <img src="" alt="">
-                    <p>John</p>
-                    <p>Cracow</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, consequuntur.</p>
+                    <div class="profile-picture">
+                        <img src="../public/img/profilepic.jpg" alt="">
+                    </div>
+                    <p class="name">John</p>
+                    <p class="profile-text">Cracow</p>
+                    <p class="profile-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, consequuntur.</p>
                     <button>CONTACT</button>
                 </div>
                 <div class="profile-card">
-                    <img src="" alt="">
-                    <p>John</p>
-                    <p>Cracow</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, consequuntur.</p>
+                    <div class="profile-picture">
+                        <img src="../public/img/profilepic.jpg" alt="">
+                    </div>
+                    <p class="name">John</p>
+                    <p class="profile-text">Cracow</p>
+                    <p class="profile-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, consequuntur.</p>
                     <button>CONTACT</button>
                 </div>
                 <div class="profile-card">
-                    <img src="" alt="">
-                    <p>John</p>
-                    <p>Cracow</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, consequuntur.</p>
+                    <div class="profile-picture">
+                        <img src="../public/img/profilepic.jpg" alt="">
+                    </div>
+                    <p class="name">John</p>
+                    <p class="profile-text">Cracow</p>
+                    <p class="profile-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, consequuntur.</p>
                     <button>CONTACT</button>
                 </div>
                 <div class="profile-card">
-                    <img src="" alt="">
-                    <p>John</p>
-                    <p>Cracow</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, consequuntur.</p>
+                    <div class="profile-picture">
+                        <img src="../public/img/profilepic.jpg" alt="">
+                    </div>
+                    <p class="name">John</p>
+                    <p class="profile-text">Cracow</p>
+                    <p class="profile-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, consequuntur.</p>
+                    <button>CONTACT</button>
+                </div>
+                <div class="profile-card">
+                    <div class="profile-picture">
+                        <img src="../public/img/profilepic.jpg" alt="">
+                    </div>
+                    <p class="name">John</p>
+                    <p class="profile-text">Cracow</p>
+                    <p class="profile-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, consequuntur.</p>
+                    <button>CONTACT</button>
+                </div>
+                <div class="profile-card">
+                    <div class="profile-picture">
+                        <img src="../public/img/profilepic.jpg" alt="">
+                    </div>
+                    <p class="name">John</p>
+                    <p class="profile-text">Cracow</p>
+                    <p class="profile-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, consequuntur.</p>
                     <button>CONTACT</button>
                 </div>
             </section>
