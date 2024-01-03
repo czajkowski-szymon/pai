@@ -7,7 +7,7 @@ class UserRepository extends Repository {
     public function getUsers(): array {
         $result = [];
         $statement = $this->database->connect()->prepare(
-            'SELECT * FROM user_;'       
+            'SELECT * FROM db.users;'       
         );
 
         $statement->execute();
@@ -19,7 +19,7 @@ class UserRepository extends Repository {
                 $user['email'],
                 $user['first_name'],
                 $user['password'],
-                $user['photoUrl'],
+                $user['photo_url'],
                 $user['bio'],
                 $user['city']
             );

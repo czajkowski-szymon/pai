@@ -23,7 +23,7 @@
                 </form>
             </div>
             <section class="profiles">
-                <div class="profile-card">
+                <!-- <div class="profile-card">
                     <div class="profile-picture">
                         <img src="../public/img/profilepic.jpg" alt="">
                     </div>
@@ -31,52 +31,25 @@
                     <p class="profile-text">Cracow</p>
                     <p class="profile-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, consequuntur.</p>
                     <button>CONTACT</button>
-                </div>
-                <div class="profile-card">
-                    <div class="profile-picture">
-                        <img src="../public/img/profilepic.jpg" alt="">
-                    </div>
-                    <p class="name">John</p>
-                    <p class="profile-text">Cracow</p>
-                    <p class="profile-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, consequuntur.</p>
-                    <button>CONTACT</button>
-                </div>
-                <div class="profile-card">
-                    <div class="profile-picture">
-                        <img src="../public/img/profilepic.jpg" alt="">
-                    </div>
-                    <p class="name">John</p>
-                    <p class="profile-text">Cracow</p>
-                    <p class="profile-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, consequuntur.</p>
-                    <button>CONTACT</button>
-                </div>
-                <div class="profile-card">
-                    <div class="profile-picture">
-                        <img src="../public/img/profilepic.jpg" alt="">
-                    </div>
-                    <p class="name">John</p>
-                    <p class="profile-text">Cracow</p>
-                    <p class="profile-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, consequuntur.</p>
-                    <button>CONTACT</button>
-                </div>
-                <div class="profile-card">
-                    <div class="profile-picture">
-                        <img src="../public/img/profilepic.jpg" alt="">
-                    </div>
-                    <p class="name">John</p>
-                    <p class="profile-text">Cracow</p>
-                    <p class="profile-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, consequuntur.</p>
-                    <button>CONTACT</button>
-                </div>
-                <div class="profile-card">
-                    <div class="profile-picture">
-                        <img src="../public/img/profilepic.jpg" alt="">
-                    </div>
-                    <p class="name">John</p>
-                    <p class="profile-text">Cracow</p>
-                    <p class="profile-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, consequuntur.</p>
-                    <button>CONTACT</button>
-                </div>
+                </div> -->
+
+                <?php foreach($users as $user): ?> 
+                    <div class="profile-card">
+                        <div class="profile-picture">
+                            <img src="<?= $user->getPhotoUrl(); ?>" alt="">
+                        </div>
+                        <p class="name">
+                            <?= $user->getFirstName(); ?>
+                        </p>
+                        <p class="profile-text">
+                            <?= $user->getCity(); ?>
+                        </p>
+                        <p class="profile-text">
+                            <?= $user->getBio(); ?>       
+                        </p>
+                        <button>CONTACT</button>
+                    </div>     
+                <?php endforeach; ?> 
             </section>
         </main>
         <footer>

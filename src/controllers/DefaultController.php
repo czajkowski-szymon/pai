@@ -2,8 +2,15 @@
 
 require_once 'AppController.php';
 require_once __DIR__.'/../models/User.php';
+require_once __DIR__.'/../repositories/UserRepository.php';
 
 class DefaultController extends AppController {
+    private UserRepository $userRepository;
+
+    public function __construct() {
+        $this->userRepository = new UserRepository();
+    }
+
     public function index() {
         $this->render('login');
     }
@@ -24,6 +31,9 @@ class DefaultController extends AppController {
     }
 
     public function discover() {
-        return $this->render('discover');
+        return $this->render(
+            'discover',
+            ['users' => $this->userRepository->getUsers()]
+        );
     }
 } 
