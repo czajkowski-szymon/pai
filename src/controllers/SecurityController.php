@@ -5,23 +5,30 @@ require_once __DIR__.'/../models/User.php';
 
 class SecurityController extends AppController {
     public function login() {
-        // $user = new User('szymon@gmail.com', 'password', 'szymon', 'czajkowski');
 
-        // if (!$this->isPost()) {
-        //     return $this->render('login');
-        // }
+        $userRepository = new UserRepository(); 
 
-        // $email = $_POST["email"];
-        // $password = $_POST["password"];
+        if (!$this->isPost()) {
+            return $this->render('login');
+        }
 
-        // if ($user->getEmail() !== $email) {
-        //     return $this->render('login', ['messages' => ['User with this email not exist!']]);
-        // }
+        $username = $_POST["username"];
+        $password = $_POST["password"];
 
-        // if ($user->getPassword() !== $password) {
-        //     return $this->render('login', ['messages' => ['Wrong password']]);
-        // }
-        // $url = "http://$_SERVER[HTTP_HOST]";
-        // header("Location: {$url}/discover");
+        $user = $userRepository->getUserByUsername($username);
+
+        if ($user->getUsername() !== $username) {
+            return $this->render('login', ['messages' => ['User with this username not exist!']]);
+        }
+
+        if ($user->getPassword() !== $password) {
+            return $this->render('login', ['messages' => ['Wrong password']]);
+        }
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/discover");
+    }
+
+    public function register() {
+
     }
 }

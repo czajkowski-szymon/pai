@@ -25,11 +25,11 @@
                         }
                     ?>
                 </div>
-                <input name="email" type="email" placeholder="Email">
+                <input name="username" type="username" placeholder="Username">
                 <input name="password" type="password" placeholder="Password">
                 <button type="submit">LOGIN</button>
             </form>
-            <p class="register-text">Don`t you have account? <a href="#">Sign up</a></p>
+            <p class="register-text">Don`t you have account? <a href="register">Sign up</a></p>
         </div>
     </div>
 </body>

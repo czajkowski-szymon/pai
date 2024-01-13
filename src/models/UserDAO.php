@@ -1,9 +1,8 @@
 <?php
 
-class User {
+class UserDAO {
     private int $userId;
     private string $username;
-    private string $password;
     private string $firstName;
     private string $photoUrl;
     private string $bio;
@@ -11,13 +10,11 @@ class User {
 
     public function __construct(int $userId,
                                 string $username,
-                                string $password,
                                 string $firstName,
                                 string $photoUrl,
                                 string $bio,
                                 string $city) {
         $this->userId = $userId;
-        $this->password = $password;
         $this->username = $username;
         $this->firstName = $firstName;
         $this->photoUrl = $photoUrl;
@@ -47,14 +44,6 @@ class User {
 
     public function setFirstName(string $firstName): void {
         $this->firstName = $firstName;
-    }
-
-    public function getPassword(): string {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): void {
-        $this->password = $password;
     }
 
     public function getPhotoUrl(): string {

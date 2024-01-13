@@ -30,6 +30,10 @@ class DefaultController extends AppController {
         $this->render('register');
     }
 
+    public function create() {
+        $this->render('create');
+    }
+
     public function discover() {
         return $this->render(
             'discover',

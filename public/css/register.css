@@ -16,8 +16,8 @@ body {
 
 .container {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
+    /* justify-content: center; */
     align-items: center;
     height: 100%;
 }
@@ -65,7 +65,7 @@ form.register {
     width: 70%;
 }
 
-input {
+input, textarea {
     font-size: .75em;
     font-weight: 600;
 
@@ -79,6 +79,11 @@ input {
     background: #FFF;
     box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.25) inset;
     color: #9D9D9D;
+}
+
+textarea {
+    resize: none;
+    font-size: 1em;
 }
 
 input:focus {
@@ -103,20 +108,7 @@ button {
     letter-spacing: .3em;
 }
 
-/* .register-text {
-    font-size: .5em;
-    color: #9D9D9D;
-}
-
-.register-text>a {
-    color: var(--main-green);
-    text-decoration: none;
-} */
-
-@media only screen and (max-device-width: 420px) {
-    .container {
-        flex-direction: column;
-    }
+@media only screen and (max-device-width:922px) {
 
     .register-container {
         width: 100%;
