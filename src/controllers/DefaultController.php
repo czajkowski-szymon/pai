@@ -3,12 +3,15 @@
 require_once 'AppController.php';
 require_once __DIR__.'/../models/User.php';
 require_once __DIR__.'/../repositories/UserRepository.php';
+require_once __DIR__.'/../repositories/CityRepository.php';
 
 class DefaultController extends AppController {
     private UserRepository $userRepository;
+    private CityRepository $cityRepository;
 
     public function __construct() {
         $this->userRepository = new UserRepository();
+        $this->cityRepository = new CityRepository();
     }
 
     public function index() {
@@ -24,10 +27,6 @@ class DefaultController extends AppController {
             return $this->render('login');
         }
         die("FORM SEND");
-    }
-    
-    public function register() {
-        $this->render('register');
     }
 
     public function create() {

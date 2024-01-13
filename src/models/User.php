@@ -7,18 +7,16 @@ class User {
     private string $firstName;
     private string $photoUrl;
     private string $bio;
-    private string $city;
+    private City $city;
 
-    public function __construct(int $userId,
-                                string $username,
+    public function __construct(string $username,
                                 string $password,
                                 string $firstName,
                                 string $photoUrl,
                                 string $bio,
-                                string $city) {
-        $this->userId = $userId;
-        $this->password = $password;
+                                City $city) {
         $this->username = $username;
+        $this->password = $password;
         $this->firstName = $firstName;
         $this->photoUrl = $photoUrl;
         $this->bio = $bio;
@@ -73,11 +71,11 @@ class User {
         $this->bio = $bio;
     }
 
-    public function getCity(): string {
+    public function getCity(): City {
         return $this->city;
     }
 
-    public function setCity(string $city): void {
+    public function setCity(City $city): void {
         $this->city = $city;
     }
 

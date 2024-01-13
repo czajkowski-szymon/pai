@@ -23,20 +23,10 @@
                 </form>
             </div>
             <section class="profiles">
-                <!-- <div class="profile-card">
-                    <div class="profile-picture">
-                        <img src="../public/img/profilepic.jpg" alt="">
-                    </div>
-                    <p class="name">John</p>
-                    <p class="profile-text">Cracow</p>
-                    <p class="profile-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, consequuntur.</p>
-                    <button>CONTACT</button>
-                </div> -->
-
                 <?php foreach($users as $user): ?> 
                     <div class="profile-card">
                         <div class="profile-picture">
-                            <img src="<?= $user->getPhotoUrl(); ?>" alt="">
+                            <img src="../public/uploads/<?= $user->getPhotoUrl(); ?>" alt="">
                         </div>
                         <p class="name">
                             <?= $user->getFirstName(); ?>

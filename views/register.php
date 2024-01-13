@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="register-container">
-            <form class="register">
+            <form acton="register" class="register" method="POST" ENCTYPE="multipart/form-data">
                 <div class="messages">
                     <?php
                         if(isset($messages)) {
@@ -27,13 +27,19 @@
                 </div>
                 <input name="username" type="text" placeholder="Username" required>
                 <input name="password" type="password" placeholder="Password" required>
-                <input name="password" type="password" placeholder="Confirm Password" required>
                 <input name="first-name" type="text" placeholder="First Name" required>
                 <textarea name="bio" rows="2" cols="50" placeholder="Tell us about yourself"></textarea>
                 <input type="file" name="file">
+                <select name="city">
+                    <?php foreach($cities as $city): ?> 
+                        <option value="<?= $city->getCityId(); ?>">
+                            <?= $city->getName(); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
                 <button type="submit">REGISTER</button>
             </form>
-            <!-- <p class="register-text">Don`t you have account? <a href="#">Sign up</a></p> -->
+            <p class="login-text">Already have account? <a href="login">Sign in</a></p>
         </div>
     </div>
 </body>

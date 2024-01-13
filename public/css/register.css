@@ -108,6 +108,16 @@ button {
     letter-spacing: .3em;
 }
 
+.login-text {
+    font-size: .5em;
+    color: #9D9D9D;
+}
+
+.login-text>a {
+    color: var(--main-green);
+    text-decoration: none;
+}
+
 @media only screen and (max-device-width:922px) {
 
     .register-container {

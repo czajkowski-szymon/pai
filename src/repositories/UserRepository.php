@@ -5,6 +5,13 @@ require_once __DIR__.'/../models/User.php';
 require_once __DIR__.'/../models/UserDAO.php';
 
 class UserRepository extends Repository {
+    private $cityRepository;
+    
+    public function __construct() {
+        parent::__construct();
+        $this->cityRepository = new CityRepository();
+    }
+
     public function getUserByUsername(string $username): User {
         $statement = $this->database->connect()->prepare(
             'SELECT * FROM db.user_ WHERE username = :username;'       
@@ -26,26 +33,29 @@ class UserRepository extends Repository {
 
         $userDetails = $statement->fetch(PDO::FETCH_ASSOC);
 
-        $statement = $this->database->connect()->prepare(
-            'SELECT * FROM db.user_details ud JOIN db.city c ON ud.city_id = c.city_id WHERE ud.city_id = :id;'
-        );
+        // $statement = $this->database->connect()->prepare(
+        //     'SELECT * FROM db.user_details ud JOIN db.city c ON ud.city_id = c.city_id WHERE ud.city_id = :id;'
+        // );
 
         $cityId = $userDetails['city_id'];
 
-        $statement->bindParam(':id', $cityId, PDO::PARAM_INT);
-        $statement->execute();
+        // $statement->bindParam(':id', $cityId, PDO::PARAM_INT);
+        // $statement->execute();
 
-        $city = $statement->fetch(PDO::FETCH_ASSOC);
+        // $city = $statement->fetch(PDO::FETCH_ASSOC);
+        $city = $this->cityRepository->getCityById($cityId); 
 
-        return new User(
-            $user['user_id'],
+        $retrievedUser = new User(
             $user['username'],
             $user['password'],
             $userDetails['first_name'],
             $userDetails['photo_url'],
             $userDetails['bio'],
-            $city['name']
+            $city
         );
+        $retrievedUser->setUserId($user['user_id']);
+
+        return $retrievedUser;
     }
 
     public function getUsers(): array {
@@ -81,5 +91,55 @@ class UserRepository extends Repository {
         }
 
         return $result;
+    }
+
+    public function addUser(User $user) {
+        $connection = $this->database->connect();
+        try {
+            $connection->beginTransaction();
+
+            $statement = $connection->prepare('INSERT INTO db.user_ (username, password) VALUES (?, ?);');
+            $statement->execute([$user->getUsername(), $user->getPassword()]);
+
+            $connection->commit();
+        } catch (PDOException $e) {
+            $connection->rollBack();
+            return null;
+        }
+        
+        $userId = $this->getUserId($user->getUsername());
+
+        try {
+            $connection->beginTransaction();
+
+            $statement = $connection->prepare(
+                'INSERT INTO db.user_details (first_name, photo_url, bio, city_id, user_id) VALUES (?, ?, ?, ?, ?);'
+            );
+            $statement->execute([
+                $user->getFirstName(), 
+                $user->getPhotoUrl(), 
+                $user->getBio(), 
+                $user->getCity()->getcityId(), 
+                $userId
+            ]);
+
+            $connection->commit();
+        } catch(PDOException $e) {
+            $connection->rollBack();
+        }
+    }
+
+    public function getUserId(string $username) {
+        $statement = $this->database->connect()->prepare('SELECT * FROM db.user_ WHERE username = :username');
+        $statement->bindParam(':username', $username);
+        $statement->execute();
+
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if (!$user) {
+            return null;
+        }
+
+        return $user['user_id'];
     }
 }
