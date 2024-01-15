@@ -10,4 +10,5 @@ Routing::get('', 'DefaultController');
 Routing::get('home', 'DefaultController');
 Routing::get('register', 'SecurityController');
 Routing::get('discover', 'DefaultController');
+Routing::get('profile', 'DefaultController');
 Routing::run($path);

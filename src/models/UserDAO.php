@@ -69,6 +69,4 @@ class UserDAO {
     public function setCity(string $city): void {
         $this->city = $city;
     }
-
-
 }

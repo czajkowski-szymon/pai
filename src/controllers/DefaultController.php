@@ -36,7 +36,11 @@ class DefaultController extends AppController {
     public function discover() {
         return $this->render(
             'discover',
-            ['users' => $this->userRepository->getUsers()]
+            ['users' => $this->userRepository->getUsersForDiscover()]
         );
+    }
+
+    public function profile() {
+        return $this->render('profile');
     }
 } 

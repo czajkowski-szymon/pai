@@ -93,6 +93,49 @@ class UserRepository extends Repository {
         return $result;
     }
 
+    public function getUsersForDiscover(): array {
+        $result = [];
+        $statement = $this->database->connect()->prepare(
+            'SELECT 
+                user_.user_id,
+                user_.username,
+                user_details.first_name,
+                user_details.photo_url,
+                user_details.bio,
+                city.name as city_name
+            FROM 
+                db.user_
+            JOIN 
+                db.user_details ON db.user_.user_id = db.user_details.user_id
+            JOIN 
+                db.city ON db.user_details.city_id = db.city.city_id
+            WHERE 
+                db.user_.username != :username;'       
+        );
+        
+        $username = "";
+        if (isset($_COOKIE['username'])) {
+            $username  = $_COOKIE['username'];
+        }
+
+        $statement->bindParam(':username', $username);
+        $statement->execute();
+        $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($users as $user) {
+            $result[] = new UserDAO(
+                $user['user_id'],
+                $user['username'],
+                $user['first_name'],
+                $user['photo_url'],
+                $user['bio'],
+                $user['city_name']
+            );
+        }
+
+        return $result;
+    }
+
     public function addUser(User $user) {
         $connection = $this->database->connect();
         try {
