@@ -20,7 +20,7 @@ body {
 }
 
 nav {
-    /* position: fixed; */
+    position: fixed;
     align-self: flex-start;
     width: 100%;
     height: 3em;
@@ -47,6 +47,7 @@ nav>a, .link-panel>a {
 }
 
 main {
+    margin-top: 3em;
     display: flex;
     flex-direction: column;
     width: 80%;
@@ -60,7 +61,7 @@ input {
 
     width: 25%;
     line-height: 1.5em;
-    padding-left: 5%;
+    padding-left: 1em;
     margin: 1em 0;
 
     border-radius: 30px;
@@ -149,6 +150,7 @@ footer {
        display: flex;
        align-items: center;
        justify-content: center; 
+       top: 0;
     }
 
     nav .link-panel {
@@ -168,6 +170,8 @@ footer {
         line-height: 2em;
         background-color: var(--main-green);
         color: white;
+        position: fixed;
+        bottom: 0;
     }
     
     footer a {
@@ -176,7 +180,7 @@ footer {
     }
 
     .footer-search-panel {
-        width: 50%;
+        width: calc(100% / 3);
         text-align: center;
     }
 }

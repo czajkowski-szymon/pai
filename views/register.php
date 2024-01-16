@@ -28,8 +28,9 @@
                 <input name="username" type="text" placeholder="Username" required>
                 <input name="password" type="password" placeholder="Password" required>
                 <input name="first-name" type="text" placeholder="First Name" required>
-                <textarea name="bio" rows="2" cols="50" placeholder="Tell us about yourself"></textarea>
-                <input type="file" name="file">
+                <textarea name="bio" rows="5" cols="50" placeholder="Bio"></textarea>
+                <label for="profile-photo">Profile photo</label>
+                <input if="profile-photo" type="file" name="file">
                 <select name="city">
                     <?php foreach($cities as $city): ?> 
                         <option value="<?= $city->getCityId(); ?>">

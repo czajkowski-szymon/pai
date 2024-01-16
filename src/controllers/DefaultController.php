@@ -43,4 +43,11 @@ class DefaultController extends AppController {
     public function profile() {
         return $this->render('profile');
     }
+
+    public function adminpanel() {
+        return $this->render(
+            'admin-panel',
+            ['users' => $this->userRepository->getUsersForDiscover()]
+        );
+    }
 } 

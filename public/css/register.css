@@ -17,7 +17,6 @@ body {
 .container {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
     height: 100%;
 }
@@ -65,7 +64,7 @@ form.register {
     width: 70%;
 }
 
-input, textarea {
+input, textarea, select {
     font-size: .75em;
     font-weight: 600;
 
@@ -82,12 +81,27 @@ input, textarea {
 }
 
 textarea {
+    width: 90%;
     resize: none;
     font-size: 1em;
+    line-height: 1em;
+    padding: 0.75em;
 }
 
 input:focus {
     outline: none;
+}
+
+label {
+    font-family: Verdana, sans-serif;
+    font-size: .75em;
+    font-weight: 600;
+    color: #9D9D9D;
+}
+
+select {
+    width: 100%;
+    margin-bottom: 0;
 }
 
 button {

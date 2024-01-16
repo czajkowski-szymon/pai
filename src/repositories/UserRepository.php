@@ -185,4 +185,40 @@ class UserRepository extends Repository {
 
         return $user['user_id'];
     }
+
+    public function deleteUser(int $userId) {
+        $statement = $this->database->connect()->prepare(
+            'DELETE FROM db.user_details WHERE user_id = :user_id;'
+        );
+        $statement->bindParam(':user_id', $userId);
+        $statement->execute();
+
+        $statement = $this->database->connect()->prepare(
+            'DELETE FROM db.user_ WHERE user_id = :user_id;'
+        );
+        $statement->bindParam(':user_id', $userId);
+        $statement->execute();
+    }
+
+    public function getRole() {
+        $username = null; 
+        if (isset($_COOKIE['username'])) {
+            $username = $_COOKIE['username'];
+        }
+
+        $statement = $this->database->connect()->prepare(
+            'SELECT user_.role_id FROM db.user_ JOIN db.role on user_.role_id = role.role_id WHERE username = :username;'
+        );
+
+        $statement->bindParam(":username", $username);
+        $statement->execute();
+
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if (!$user) {
+            return null;
+        }
+
+        return $user['role_id'];
+    }
 }

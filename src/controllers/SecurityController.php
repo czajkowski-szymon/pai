@@ -75,6 +75,21 @@ class SecurityController extends AppController {
         );
     }
 
+    public function deleteUser() {
+        if (!$this->isPost()) {
+            return $this->render('admin-panel');
+        }
+
+        $userId = $_POST['user_id'];
+
+        $this->userRepository->deleteUser($userId);
+
+        return $this->render(
+            'admin-panel',
+            ['users' => $this->userRepository->getUsersForDiscover()]
+        );
+    }
+
     private function validate(array $file): bool {
         if ($file['size'] > self::MAX_FILE_SIZE) {
             $this->message[] = 'File is too large for destination file system.';
