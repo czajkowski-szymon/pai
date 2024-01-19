@@ -1,7 +1,11 @@
 <?php
 
+use exceptions\UserNotFoundException;
+
 require_once 'AppController.php';
 require_once __DIR__.'/../models/User.php';
+require_once __DIR__.'/../repositories/SportRepository.php';
+require_once __DIR__.'/../exceptions/UserNotFoundException.php';
 
 class SecurityController extends AppController {
     const MAX_FILE_SIZE = 1024 * 1024;
@@ -9,14 +13,15 @@ class SecurityController extends AppController {
     const UPLOAD_DIRECTORY = '/../public/uploads/';
 
     private $message = [];
-    private $userRepository;
-    private $cityRepository;
+    private UserRepository $userRepository;
+    private CityRepository $cityRepository;
+    private SportRepository $sportRepository;
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
         $this->userRepository = new UserRepository();
         $this->cityRepository = new CityRepository();
+        $this->sportRepository = new SportRepository();
     }
 
     public function login() {
@@ -28,15 +33,19 @@ class SecurityController extends AppController {
         $username = $_POST["username"];
         $password = $_POST["password"];
 
-        $user = $this->userRepository->getUserByUsername($username);
+        if (empty($username) || empty($password)) {
+            return $this->render('login', ['messages' => ['Fill all fields']]);
+        }
 
-        if ($user->getUsername() !== $username) {
-            return $this->render('login', ['messages' => ['User with this username not exist!']]);
+        try {
+            $user = $this->userRepository->getUserByUsername($username);
+        } catch(UserNotFoundException $e) {
+            return $this->render('login', ['messages' => [$e->getMessage()]]);
         }
 
         $hashedPassword = $user->getPassword();
         if (!password_verify($password, $hashedPassword)) {
-            return $this->render('login', ['messages' => ['Wrong password!']]);
+            return $this->render('login', ['messages' => ['Wrong password']]);
         }
 
         setcookie("username", $user->getUsername(), time() + 360, '/');
@@ -45,23 +54,36 @@ class SecurityController extends AppController {
         header("Location: {$url}/discover");
     }
 
-    public function register() {
+    public function register() {    
         if ($this->isPost() && is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])) {
+            if ($this->userRepository->isUserInDb(trim($_POST['username']))) {
+                return $this->render(
+                    'register',
+                    [
+                        'cities' => $this->cityRepository->getCities(), 
+                        'sports' => $this->sportRepository->getSports(),
+                        'messages' => ['Username is taken']
+                    ]
+                );
+            }
+
             move_uploaded_file(
                 $_FILES['file']['tmp_name'],
                 dirname(__DIR__) . self::UPLOAD_DIRECTORY . $_FILES['file']['name']
             );
             
+        
             $city = $this->cityRepository->getCityById($_POST['city']);
             $hashedPassword = password_hash($_POST['password'], PASSWORD_BCRYPT); 
             $user = new User(
-                $_POST['username'], 
-                $hashedPassword, 
+                trim($_POST['username']), 
                 $_POST['first-name'], 
                 $_FILES['file']['name'], 
                 $_POST['bio'],
                 $city
             );
+            $user->setPassword($hashedPassword);
+            $user->setSports($_POST['sports']);
 
             $this->userRepository->addUser($user);
 
@@ -71,7 +93,7 @@ class SecurityController extends AppController {
 
         return $this->render(
             'register',
-            ['cities' => $this->cityRepository->getCities()]
+            ['cities' => $this->cityRepository->getCities(), 'sports' => $this->sportRepository->getSports()]
         );
     }
 

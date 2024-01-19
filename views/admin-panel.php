@@ -42,12 +42,12 @@
                     <?php foreach($users as $user): ?> 
                         <tr>
                             <td><?= $user->getFirstName(); ?></td>
-                            <td><?= $user->getCity(); ?></td>
+                            <td><?= $user->getCity()->getName(); ?></td>
                             <td><?= $user->getUsername(); ?></td>
                             <td>
-                                <form method="POST" action="deleteUser">
+                                <form action="deleteUser" method="POST">
                                     <input type="hidden" name="user_id" value="<?= $user->getUserId(); ?>">
-                                    <button type="submit">DELETE</button>
+                                    <button type="submit">DELETE</button> 
                                 </form>
                             </td>
                         </tr>

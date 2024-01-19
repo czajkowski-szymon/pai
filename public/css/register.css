@@ -3,22 +3,19 @@
 }
 
 body {
-    /* position: fixed; */
-    /* top: 0;
-    left: 0; */
     margin: 0;
     padding: 0;
-    height: 100vh;
     width: 100vw;
     font-family: Verdana, sans-serif;
     font-size: 1.5em;
+    overflow-x: hidden;
 }
 
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
+    max-width: 100%;
 }
 
 .header-box {
@@ -88,8 +85,12 @@ textarea {
     padding: 0.75em;
 }
 
-input:focus {
-    outline: none;
+input:focus, textarea:focus {
+    outline-color: #9D9D9D;
+}
+
+input::placeholder, textarea::placeholder {
+    color: #9D9D9D;
 }
 
 label {
@@ -101,7 +102,34 @@ label {
 
 select {
     width: 100%;
-    margin-bottom: 0;
+}
+
+.sports-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sport-label {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+}
+
+.sport-label>input {
+    width: unset;
+}
+
+input[type='checkbox'] {
+    accent-color: var(--main-green);
+}
+
+.message {
+    color: var(--main-green);
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 1em;
 }
 
 button {
@@ -125,6 +153,7 @@ button {
 .login-text {
     font-size: .5em;
     color: #9D9D9D;
+    margin-bottom: 3em;
 }
 
 .login-text>a {

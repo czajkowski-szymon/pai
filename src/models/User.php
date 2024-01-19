@@ -8,15 +8,14 @@ class User {
     private string $photoUrl;
     private string $bio;
     private City $city;
+    private array $sports;
 
     public function __construct(string $username,
-                                string $password,
                                 string $firstName,
                                 string $photoUrl,
                                 string $bio,
                                 City $city) {
         $this->username = $username;
-        $this->password = $password;
         $this->firstName = $firstName;
         $this->photoUrl = $photoUrl;
         $this->bio = $bio;
@@ -79,5 +78,24 @@ class User {
         $this->city = $city;
     }
 
+    public function getSports(): array {
+        return $this->sports;
+    }
 
+    public function setSports(array $sports): void {
+        $this->sports = $sports;
+    }
+
+    public function addSport(Sport $sport): void {
+        $this->sports[] = $sport;
+    }
+
+    public function hasSport(int $sportId): bool {
+        foreach ($this->sports as $sport) {
+            if ($sport->getSportId() === $sportId) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

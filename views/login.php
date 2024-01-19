@@ -16,7 +16,9 @@
         </div>
         <div class="login-container">
             <form action="login" class="login" method="POST">
-                <div class="messages">
+                <input name="username" type="username" placeholder="Username">
+                <input name="password" type="password" placeholder="Password">
+                <div class="message">
                     <?php
                         if(isset($messages)) {
                             foreach($messages as $message) {
@@ -25,8 +27,6 @@
                         }
                     ?>
                 </div>
-                <input name="username" type="username" placeholder="Username">
-                <input name="password" type="password" placeholder="Password">
                 <button type="submit">LOGIN</button>
             </form>
             <p class="register-text">Don`t you have account? <a href="register">Sign up</a></p>

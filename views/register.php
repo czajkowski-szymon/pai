@@ -15,8 +15,8 @@
             </div>
         </div>
         <div class="register-container">
-            <form acton="register" class="register" method="POST" ENCTYPE="multipart/form-data">
-                <div class="messages">
+            <form acton="register" id="register-form" class="register" method="POST" ENCTYPE="multipart/form-data">
+                <div class="message">
                     <?php
                         if(isset($messages)) {
                             foreach($messages as $message) {
@@ -28,9 +28,9 @@
                 <input name="username" type="text" placeholder="Username" required>
                 <input name="password" type="password" placeholder="Password" required>
                 <input name="first-name" type="text" placeholder="First Name" required>
-                <textarea name="bio" rows="5" cols="50" placeholder="Bio"></textarea>
+                <textarea name="bio" rows="5" cols="50" placeholder="Bio" required></textarea>
                 <label for="profile-photo">Profile photo</label>
-                <input if="profile-photo" type="file" name="file">
+                <input if="profile-photo" type="file" name="file" required>
                 <select name="city">
                     <?php foreach($cities as $city): ?> 
                         <option value="<?= $city->getCityId(); ?>">
@@ -38,6 +38,16 @@
                         </option>
                     <?php endforeach; ?>
                 </select>
+                <div class="sports-container">
+                    <?php foreach($sports as $index => $sport): ?>
+                        <label class="sport-label">
+                            <input class="sport-input" 
+                                type="checkbox" 
+                                name="sports[]" 
+                                value="<?= $sport->getSportId(); ?>"> <?= $sport->getName(); ?>
+                        </label>
+                    <?php endforeach; ?> 
+                </div>
                 <button type="submit">REGISTER</button>
             </form>
             <p class="login-text">Already have account? <a href="login">Sign in</a></p>

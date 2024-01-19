@@ -45,11 +45,16 @@
                             <?= $user->getFirstName(); ?>
                         </p>
                         <p class="profile-text">
-                            <?= $user->getCity(); ?>
+                            <?= $user->getCity()->getName(); ?>
                         </p>
                         <p class="profile-text">
                             <?= $user->getBio(); ?>       
                         </p>
+                        <ul>
+                            <?php foreach($user->getSports() as $sport): ?>
+                                <li> <?= $sport->getName(); ?> </li>
+                            <?php endforeach; ?> 
+                        </ul>
                         <button>CONTACT</button>
                     </div>     
                 <?php endforeach; ?> 
