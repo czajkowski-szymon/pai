@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php
     include('is-user-logged.php');
+    header("Cache-Control: no-cache, no-store, must-revalidate");
 ?>
 <html lang="pl">
 <head>
@@ -31,9 +32,7 @@
         </nav>
         <main>
             <div class="search-panel">
-                <form>
-                    <input type="text" placeholder="City">
-                </form>
+                <input type="text" placeholder="City">
             </div>
             <section class="profiles">
                 <?php foreach($users as $user): ?> 
@@ -55,7 +54,11 @@
                                 <li> <?= $sport->getName(); ?> </li>
                             <?php endforeach; ?> 
                         </ul>
-                        <button>CONTACT</button>
+                        <form action="arrangeTraining" class="training-date" method="POST">
+                            <input type="date" name="training-date">
+                            <input type="hidden" name="user-id" value="<?= $user->getUserId(); ?>">
+                            <button type="submit">SEND</button>
+                        </form>
                     </div>     
                 <?php endforeach; ?> 
             </section>

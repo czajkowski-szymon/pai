@@ -22,4 +22,17 @@ class SportRepository extends Repository {
 
         return $result;
     }
+
+    public function getSportById(int $sportId): Sport{
+        $statement = $this->database->connect()->prepare(
+            'SELECT * FROM db.sport WHERE sport_id = :sport_id;'       
+        );
+
+        $statement->bindParam(':sport_id', $sportId);
+        $statement->execute();
+
+        $sport = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return new Sport($sport['sport_id'], $sport['name']);
+    }
 }

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../public/css/register.css">
+    <script type="text/javascript" src="../public/js/validation.js" defer></script>
     <title>Register</title>
 </head>
 <body>
@@ -27,6 +28,7 @@
                 </div>
                 <input name="username" type="text" placeholder="Username" required>
                 <input name="password" type="password" placeholder="Password" required>
+                <input name="confirmedPassword" type="password" placeholder="Confirm Password" required>
                 <input name="first-name" type="text" placeholder="First Name" required>
                 <textarea name="bio" rows="5" cols="50" placeholder="Bio" required></textarea>
                 <label for="profile-photo">Profile photo</label>

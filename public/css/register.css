@@ -161,6 +161,13 @@ button {
     text-decoration: none;
 }
 
+.no-valid {
+    border: 1px solid red;
+    border-radius: 30px;
+    box-shadow: 0 0 0.2em red;
+    outline: none;
+}
+
 @media only screen and (max-device-width:922px) {
 
     .register-container {

@@ -5,9 +5,12 @@ use exceptions\UserNotFoundException;
 require_once 'AppController.php';
 require_once __DIR__.'/../models/User.php';
 require_once __DIR__.'/../repositories/SportRepository.php';
+require_once __DIR__.'/../repositories/UserRepository.php';
+require_once __DIR__.'/../repositories/CityRepository.php';
 require_once __DIR__.'/../exceptions/UserNotFoundException.php';
 
 class SecurityController extends AppController {
+    
     const MAX_FILE_SIZE = 1024 * 1024;
     const SUPPORTED_TYPES = ['image/png', 'image/jpeg'];
     const UPLOAD_DIRECTORY = '/../public/uploads/';
@@ -94,21 +97,6 @@ class SecurityController extends AppController {
         return $this->render(
             'register',
             ['cities' => $this->cityRepository->getCities(), 'sports' => $this->sportRepository->getSports()]
-        );
-    }
-
-    public function deleteUser() {
-        if (!$this->isPost()) {
-            return $this->render('admin-panel');
-        }
-
-        $userId = $_POST['user_id'];
-
-        $this->userRepository->deleteUser($userId);
-
-        return $this->render(
-            'admin-panel',
-            ['users' => $this->userRepository->getUsersForDiscover()]
         );
     }
 

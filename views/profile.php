@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <?php
     include('is-user-logged.php');
+    header("Cache-Control: no-cache, no-store, must-revalidate");
 ?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/2310aedf41.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../public/js/logout.js" defer></script>
     <link rel="stylesheet" href="../public/css/profile.css">
     <title>Profile page</title>
 </head>
@@ -50,6 +52,59 @@
                     <p class="profile-text">
                         <?= $user->getBio(); ?>
                     </p>
+                    <ul>
+                        <?php foreach($user->getSports() as $sport): ?>
+                            <li> <?= $sport->getName(); ?> </li>
+                        <?php endforeach; ?> 
+                    </ul>
+                </div>
+            </section>
+            <section class="training-panel">
+                <div class="upcoming-trainings">
+                    <p>Trainings</p>
+                    <ul>
+                        <?php foreach($trainings as $training): ?>
+                            <li>
+                                <div class="training-card"> 
+                                    <?php
+                                        $invitedUser = $training->getInvitedUser();
+                                        $invitingUser = $training->getInvitingUser();
+                                        $partnerUser = ($user->getUserId() === $invitedUser->getUserId()) ? $invitingUser : $invitedUser;
+                                    ?>
+                                    <div class="training-info">
+                                        <p>Training with: <?= $partnerUser->getFirstName(); ?></p>
+                                        <p>Date: <?= $training->getDate()->format('d-m-Y'); ?></p>
+                                    </div>
+                                </div>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+                <div class="invitations">
+                    <p>Invitations</p>
+                    <ul>
+                        <?php foreach($invitations as $invitation): ?>
+                            <li>
+                                <div class="training-card">
+                                    <?php
+                                        $invitedUser = $invitation->getInvitedUser();
+                                        $invitingUser = $invitation->getInvitingUser();
+                                        $partnerUser = ($user->getUserId() === $invitedUser->getUserId()) ? $invitingUser : $invitedUser;
+                                    ?>
+                                    <div class="training-info">
+                                        <p>Invitation from: <?= $partnerUser->getFirstName(); ?></p>
+                                        <p>Date: <?= $invitation->getDate()->format('d-m-Y'); ?></p>
+                                    </div>
+                                    <form action="acceptInvite" method="POST">
+                                        <input type="hidden" name="training-id" value="<?= $invitation->getTrainingId(); ?>">
+                                        <button type="submit">
+                                            <i class="fa-solid fa-check"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
                 </div>
             </section>
         </main>
