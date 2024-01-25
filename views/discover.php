@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../public/css/discover.css">
     <script src="https://kit.fontawesome.com/2310aedf41.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../public/js/logout.js" defer></script>
+    <script type="text/javascript" src="../public/js/search.js" defer></script>
     <title>Discover</title>
 </head>
 <body>
@@ -83,3 +84,22 @@
     </div>
 </body>
 </html>
+
+<template id="profile-template">
+    <div class="profile-card">
+        <div class="profile-picture">
+            <img src="" alt="">
+        </div>
+        <p class="name"></p>
+        <p class="profile-text" id="city"></p>
+        <p class="profile-text" id="bio"></p>
+        <ul>
+            <li></li>
+        </ul>
+        <form action="arrangeTraining" class="training-date" method="POST">
+            <input type="date" name="training-date">
+            <input type="hidden" name="user-id" value="">
+            <button type="submit">SEND</button>
+        </form>
+    </div>
+</template>

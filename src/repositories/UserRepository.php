@@ -236,6 +236,7 @@ class UserRepository extends Repository {
 
     public function getUsersByCity(string $cityName) {
         $result = [];
+        $cityName = '%' . strtolower($cityName) . '%';
         $statement = $this->database->connect()->prepare(
             'SELECT 
                 user_.user_id,
@@ -245,8 +246,7 @@ class UserRepository extends Repository {
                 user_details.bio,
                 city.city_id,
                 city.name as city_name,
-                sport.sport_id,
-				sport.name as sport_name
+                STRING_AGG(sport.name::TEXT, \', \') as sport_names
             FROM 
                 db.user_
             JOIN 
@@ -258,7 +258,9 @@ class UserRepository extends Repository {
             LEFT JOIN
                 db.sport ON db.user_sport.sport_id = db.sport.sport_id
             WHERE 
-                db.user_.username != :username AND db.user_.role_id != 1 AND city_mane = :city_name;'       
+                db.user_.username != :username AND db.user_.role_id != 1 AND LOWER(db.city.name) LIKE :city_name
+            GROUP BY
+                user_.user_id, user_.username, user_details.first_name, user_details.photo_url, user_details.bio, city.city_id, city.name;'       
         );
 
         $username = "";
