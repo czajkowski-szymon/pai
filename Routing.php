@@ -22,7 +22,8 @@ class Routing {
     }
 
     public static function run($url) {
-        $action = explode('/', $url)[0];
+        $urlParts = explode("/", $url);
+        $action = $urlParts[0];
         
         if (!array_key_exists($action, self::$routes)) {
             // TODO dodaj strone bledu - ErrorController
@@ -32,6 +33,9 @@ class Routing {
         $controller = self::$routes[$action];
         $obj = new $controller;
         $action = $action ?: 'index';
-        $obj->$action();
+
+        $id = $urlParts[1] ?? '';
+
+        $obj->$action($id);
     }
 }

@@ -175,6 +175,8 @@ class UserRepository extends Repository {
                 user_details.first_name,
                 user_details.photo_url,
                 user_details.bio,
+                user_details.likes,
+                user_details.dislikes,
                 city.city_id,
                 city.name as city_name,
                 sport.sport_id,
@@ -214,6 +216,8 @@ class UserRepository extends Repository {
                     new City($userData['city_id'], $userData['city_name'])
                 );
                 $retrievedUser->setUserId($userData['user_id']);
+                $retrievedUser->setLikes($userData['likes']);
+                $retrievedUser->setDislikes($userData['dislikes']);
         
                 // Dodaj sporty użytkownika do obiektu użytkownika
                 if (!empty($userData['sport_id'])) {
@@ -397,5 +401,63 @@ class UserRepository extends Repository {
         } else {
             return false;
         }
+    }
+
+    public function like(int $ratedUserId, int $ratingUserId) {
+        $connection = $this->database->connect();
+        try {
+            $connection->beginTransaction();
+
+            $statement = $this->database->connect()->prepare(
+                "INSERT INTO db.rating (rated_user_id, rating_user_id, rating_type) VALUES (?, ?, 'like');"       
+            );
+
+            $statement->execute([
+                $ratedUserId, $ratingUserId
+            ]);
+
+            $connection->commit();
+        } catch(PDOException $e) {
+            $connection->rollBack();
+            //return null;
+        }
+
+        $statement = $this->database->connect()->prepare(
+            "SELECT likes, dislikes FROM db.user_details WHERE user_id = :user_id;"       
+        );
+
+        $statement->bindParam(':user_id', $ratedUserId, PDO::PARAM_INT);
+        $statement->execute();
+        
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function dislike(int $ratedUserId, int $ratingUserId) {
+        $connection = $this->database->connect();
+        try {
+            $connection->beginTransaction();
+
+            $statement = $this->database->connect()->prepare(
+                "INSERT INTO db.rating (rated_user_id, rating_user_id, rating_type) VALUES (?, ?, 'dislike');"       
+            );
+    
+            $statement->execute([
+                $ratedUserId, $ratingUserId
+            ]);
+
+            $connection->commit();
+        } catch(PDOException $e) {
+            $connection->rollBack();
+            //return null;
+        }
+
+        $statement = $this->database->connect()->prepare(
+            "SELECT likes, dislikes FROM db.user_details WHERE user_id = :user_id;"       
+        );
+
+        $statement->bindParam(':user_id', $ratedUserId, PDO::PARAM_INT);
+        $statement->execute();
+        
+        return $statement->fetch(PDO::FETCH_ASSOC);
     }
 }

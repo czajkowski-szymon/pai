@@ -9,6 +9,8 @@ class User {
     private string $bio;
     private City $city;
     private array $sports;
+    private int $likes;
+    private int $dislikes;
 
     public function __construct(string $username,
                                 string $firstName,
@@ -85,6 +87,23 @@ class User {
     public function setSports(array $sports): void {
         $this->sports = $sports;
     }
+
+    public function getLikes(): int {
+        return $this->likes;
+    }
+
+    public function setLikes(int $likes): void {
+        $this->likes = $likes;
+    }
+
+    public function getDislikes(): int {
+        return $this->dislikes;
+    }
+
+    public function setDislikes(int $dislikes): void {
+        $this->dislikes = $dislikes;
+    }
+
 
     public function addSport(Sport $sport): void {
         $this->sports[] = $sport;

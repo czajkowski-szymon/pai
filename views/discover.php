@@ -11,6 +11,7 @@
     <script src="https://kit.fontawesome.com/2310aedf41.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../public/js/logout.js" defer></script>
     <script type="text/javascript" src="../public/js/search.js" defer></script>
+    <script type="text/javascript" src="../public/js/ratings.js" defer></script>
     <title>Discover</title>
 </head>
 <body>
@@ -37,7 +38,7 @@
             </div>
             <section class="profiles">
                 <?php foreach($users as $user): ?> 
-                    <div class="profile-card">
+                    <div id="<?= $user->getUserId(); ?>" class="profile-card">
                         <div class="profile-picture">
                             <img src="../public/uploads/<?= $user->getPhotoUrl(); ?>" alt="">
                         </div>
@@ -60,6 +61,10 @@
                             <input type="hidden" name="user-id" value="<?= $user->getUserId(); ?>">
                             <button type="submit">SEND</button>
                         </form>
+                        <div class="ratings">
+                            <i id="likes" class="fa-solid fa-thumbs-up"> <?= $user->getLikes(); ?> </i>
+                            <i id="dislikes" class="fa-solid fa-thumbs-down"> <?= $user->getDislikes(); ?> </i>
+                        </div>
                     </div>     
                 <?php endforeach; ?> 
             </section>

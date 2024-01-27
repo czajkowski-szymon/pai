@@ -19,5 +19,7 @@ Routing::get('register', 'SecurityController');
 Routing::get('discover', 'DefaultController');
 Routing::get('profile', 'DefaultController');
 Routing::get('adminpanel', 'AdminController');
+Routing::get('like', 'UserController');
+Routing::get('dislike', 'UserController');
 
 Routing::run($path);
