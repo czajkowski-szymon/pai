@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/2310aedf41.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="../public/js/logout.js" defer></script>
+    <script type="text/javascript" src="../public/js/trainings.js" defer></script>
     <link rel="stylesheet" href="../public/css/profile.css">
     <title>Profile page</title>
 </head>
@@ -60,7 +61,7 @@
                 </div>
             </section>
             <section class="training-panel">
-                <div class="upcoming-trainings">
+                <div class="trainings">
                     <p>Trainings</p>
                     <ul>
                         <?php foreach($trainings as $training): ?>
@@ -97,10 +98,13 @@
                                     </div>
                                     <form action="acceptInvite" method="POST">
                                         <input type="hidden" name="training-id" value="<?= $invitation->getTrainingId(); ?>">
-                                        <button type="submit">
+                                        <!-- <button type="submit">
                                             <i class="fa-solid fa-check"></i>
-                                        </button>
+                                        </button> -->
                                     </form>
+                                    <button training-id="<?= $invitation->getTrainingId(); ?>">
+                                        <i class="fa-solid fa-check"></i>
+                                    </button>
                                 </div>
                             </li>
                         <?php endforeach; ?>
@@ -128,3 +132,52 @@
     </div>
 </body>
 </html>
+
+<template class="training-template">
+    <p>Trainings</p>
+    <ul>
+        <?php foreach($trainings as $training): ?>
+            <li>
+                <div class="training-card"> 
+                    <?php
+                        $invitedUser = $training->getInvitedUser();
+                        $invitingUser = $training->getInvitingUser();
+                        $partnerUser = ($user->getUserId() === $invitedUser->getUserId()) ? $invitingUser : $invitedUser;
+                    ?>
+                    <div class="training-info">
+                        <p>Training with: <?= $partnerUser->getFirstName(); ?></p>
+                        <p>Date: <?= $training->getDate()->format('d-m-Y'); ?></p>
+                    </div>
+                </div>
+             </li>
+        <?php endforeach; ?>
+    </ul>
+</template>
+
+
+<template class="invitation-template">
+    <p>Invitations</p>
+    <ul>
+    <?php foreach($invitations as $invitation): ?>
+        <li>
+            <div class="training-card">
+                <?php
+                    $invitedUser = $invitation->getInvitedUser();
+                    $invitingUser = $invitation->getInvitingUser();
+                    $partnerUser = ($user->getUserId() === $invitedUser->getUserId()) ? $invitingUser : $invitedUser;
+                ?>
+                <div class="training-info">
+                    <p>Invitation from: <?= $partnerUser->getFirstName(); ?></p>
+                    <p>Date: <?= $invitation->getDate()->format('d-m-Y'); ?></p>
+                </div>
+                <form action="acceptInvite" method="POST">
+                    <input type="hidden" name="training-id" value="<?= $invitation->getTrainingId(); ?>">
+                    <button type="submit">
+                        <i class="fa-solid fa-check"></i>
+                    </button>
+                </form>
+            </div>
+        </li>
+    <?php endforeach; ?>
+    </ul>
+</template>

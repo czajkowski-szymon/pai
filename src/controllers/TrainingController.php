@@ -35,13 +35,25 @@ class TrainingController extends AppController {
     }
 
     public function acceptInvite() {
-        if (!$this->isPost()) {
-            return $this->render('dicover');
-        }
+        // if (!$this->isPost()) {
+        //     return $this->render('dicover');
+        // }
         
-        $this->trainingRepository->acceptTraining($_POST['training-id']);
+        $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 
-        $url = "http://$_SERVER[HTTP_HOST]";
-        header("Location: {$url}/profile");
+        if ($contentType === "application/json") {
+            $content = trim(file_get_contents("php://input"));
+            $decoded = json_decode($content, true);
+
+            header('Content-type: application/json');
+            http_response_code(200);
+
+            echo json_encode($this->trainingRepository->acceptTraining($decoded['id']));
+        }
+
+        // $this->trainingRepository->acceptTraining($_POST['training-id']);
+
+        // $url = "http://$_SERVER[HTTP_HOST]";
+        // header("Location: {$url}/profile");
     }
 }

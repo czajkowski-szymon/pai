@@ -93,9 +93,7 @@
         <p class="name"></p>
         <p class="profile-text" id="city"></p>
         <p class="profile-text" id="bio"></p>
-        <ul>
-            <li></li>
-        </ul>
+        <ul></ul>
         <form action="arrangeTraining" class="training-date" method="POST">
             <input type="date" name="training-date">
             <input type="hidden" name="user-id" value="">
