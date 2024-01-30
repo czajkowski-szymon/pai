@@ -1,7 +1,5 @@
 <?php
 
-use exceptions\UserNotFoundException;
-
 require_once 'AppController.php';
 require_once __DIR__.'/../models/User.php';
 require_once __DIR__.'/../repository/UserRepository.php';
@@ -24,10 +22,7 @@ class DefaultController extends AppController {
     }
 
     public function discover() {
-        if (!isset($_COOKIE['username'])) {
-            $url = "http://$_SERVER[HTTP_HOST]";
-            header("Location: {$url}/login"); 
-        }
+        include(__DIR__.'/../utils/is-user-logged.php');
 
         return $this->render(
             'discover', [
@@ -38,10 +33,7 @@ class DefaultController extends AppController {
     }
 
     public function profile() {
-        if (!isset($_COOKIE['username'])) {
-            $url = "http://$_SERVER[HTTP_HOST]";
-            header("Location: {$url}/login"); 
-        }
+        include(__DIR__.'/../utils/is-user-logged.php');
 
         $email = $_COOKIE['username'];
 

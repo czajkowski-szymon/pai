@@ -1,5 +1,7 @@
 <?php
 
+use exceptions\UserNotFoundException;
+
 require_once 'AppController.php';
 require_once __DIR__.'/../repository/UserRepository.php';
 
@@ -12,7 +14,11 @@ class UserController extends AppController {
     }
 
     public function search() {
-        include(__DIR__.'/../../views/is-user-logged.php');
+        include(__DIR__.'/../utils/is-user-logged.php');
+        if (!$this->isPost()) {
+            include(__DIR__.'/../utils/redirect-to-discover.php');
+        }
+
         $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 
         if ($contentType === "application/json") {
@@ -27,14 +33,14 @@ class UserController extends AppController {
     }
 
     public function like(int $userId) {
-        include(__DIR__.'/../../views/is-user-logged.php');
+        include(__DIR__.'/../utils/is-user-logged.php');
         $ratingUserId = $this->userRepository->getUserByEmail($_COOKIE['username'])->getUserId();
         http_response_code(200);
         echo json_encode($this->userRepository->like($userId, $ratingUserId));
     }
 
     public function dislike(int $userId) {
-        include(__DIR__.'/../../views/is-user-logged.php');
+        include(__DIR__.'/../utils/is-user-logged.php');
         $ratingUserId = $this->userRepository->getUserByEmail($_COOKIE['username'])->getUserId();
         http_response_code(200);
         echo json_encode($this->userRepository->dislike($userId, $ratingUserId));

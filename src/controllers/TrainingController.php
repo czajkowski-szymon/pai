@@ -15,7 +15,11 @@ class TrainingController extends AppController {
     }
 
     public function arrangeTraining() {
-        include(__DIR__.'/../../views/is-user-logged.php');
+        include(__DIR__.'/../utils/is-user-logged.php');
+        if (!$this->isPost()) {
+            include(__DIR__.'/../utils/redirect-to-discover.php');
+        }
+        
         $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
         
         if ($contentType === "application/json") {
@@ -40,7 +44,7 @@ class TrainingController extends AppController {
 
     public function acceptInvite() {
         if (!$this->isPost()) {
-            return $this->render('profile');
+            include(__DIR__.'/../utils/redirect-to-discover.php');
         }
 
         $this->trainingRepository->acceptTraining($_POST['training-id']);
@@ -51,7 +55,7 @@ class TrainingController extends AppController {
 
     public function deleteInvite() {
         if (!$this->isPost()) {
-            return $this->render('profile');
+            include(__DIR__.'/../utils/redirect-to-discover.php');
         }
 
         $this->trainingRepository->deleteTraining($_POST['training-id']);

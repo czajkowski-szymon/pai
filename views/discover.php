@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-    include('is-user-logged.php');
+    include(__DIR__.'/../src/utils/is-user-logged.php');
     header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 ?>
 <html lang="pl">
