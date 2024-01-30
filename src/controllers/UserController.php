@@ -32,15 +32,21 @@ class UserController extends AppController {
         }
     }
 
-    public function like(int $userId) {
+    public function like($userId) {
         include(__DIR__.'/../utils/is-user-logged.php');
+        if ($userId === '') {
+            include(__DIR__.'/../utils/redirect-to-discover.php');
+        }
         $ratingUserId = $this->userRepository->getUserByEmail($_COOKIE['username'])->getUserId();
         http_response_code(200);
         echo json_encode($this->userRepository->like($userId, $ratingUserId));
     }
 
-    public function dislike(int $userId) {
+    public function dislike($userId) {
         include(__DIR__.'/../utils/is-user-logged.php');
+        if ($userId === '') {
+            include(__DIR__.'/../utils/redirect-to-discover.php');
+        }
         $ratingUserId = $this->userRepository->getUserByEmail($_COOKIE['username'])->getUserId();
         http_response_code(200);
         echo json_encode($this->userRepository->dislike($userId, $ratingUserId));
