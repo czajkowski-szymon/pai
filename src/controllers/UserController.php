@@ -12,6 +12,7 @@ class UserController extends AppController {
     }
 
     public function search() {
+        include(__DIR__.'/../../views/is-user-logged.php');
         $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 
         if ($contentType === "application/json") {
@@ -26,12 +27,14 @@ class UserController extends AppController {
     }
 
     public function like(int $userId) {
+        include(__DIR__.'/../../views/is-user-logged.php');
         $ratingUserId = $this->userRepository->getUserByEmail($_COOKIE['username'])->getUserId();
         http_response_code(200);
         echo json_encode($this->userRepository->like($userId, $ratingUserId));
     }
 
     public function dislike(int $userId) {
+        include(__DIR__.'/../../views/is-user-logged.php');
         $ratingUserId = $this->userRepository->getUserByEmail($_COOKIE['username'])->getUserId();
         http_response_code(200);
         echo json_encode($this->userRepository->dislike($userId, $ratingUserId));

@@ -15,6 +15,7 @@ class TrainingController extends AppController {
     }
 
     public function arrangeTraining() {
+        include(__DIR__.'/../../views/is-user-logged.php');
         $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
         
         if ($contentType === "application/json") {
