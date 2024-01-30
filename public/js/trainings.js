@@ -1,22 +1,27 @@
-const trainingsContainer = document.querySelector(".trainings");
-const invitationsContainer = document.querySelector(".invitations");
+const inviteButtons = document.querySelectorAll('.invite-button');
 
-const acceptButton = document.querySelector('button');
-const trainingId = acceptButton.getAttribute('training-id');
-
-acceptButton.addEventListener('click', function(event) {
-    const data = {id: trainingId};
-    console.log('halo');    
+function invite() {
+    const inviteButton = this;
+    const invitedUserId = inviteButton.previousSibling.previousSibling.value;
+    const trainingDate = inviteButton.previousSibling.previousSibling.previousElementSibling.value;
     
-    fetch("/acceptInvite", {
+    const tmpDate = new Date(trainingDate);
+    const now = new Date();
+
+    if (tmpDate < now || trainingDate == '') {
+        alert("Choose correct date!");
+        return;
+    }
+
+    const data = {userId: invitedUserId, date: trainingDate};
+
+    fetch("/arrangeTraining", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
-    }).then(function (response) {
-        return response.json();
-    }).then(function () {
-        location.reload();
     });
-});
+}
+
+inviteButtons.forEach(button => button.addEventListener("click",  invite));

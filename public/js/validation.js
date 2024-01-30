@@ -1,5 +1,15 @@
 const form = document.querySelector("form");
+const emailInput = form.querySelector('input[name="email"]');
+const passwordInput = form.querySelector('input[name="password"]');
 const confirmedPasswordInput = form.querySelector('input[name="confirmedPassword"]');
+
+function isEmail(email) {
+    return /\S+@\S+\.\S+/.test(email);
+}
+
+function isPasswordValid(password) {
+    return /^(?=.{6,}).*$/.test(password);
+}
 
 function arePasswordsSame(password, confirmedPassword) {
     return password === confirmedPassword;
@@ -10,6 +20,22 @@ function markValidation(element, condition) {
 }
 
 function validatePassword() {
+    setTimeout(function () {
+            markValidation(passwordInput, isPasswordValid(passwordInput.value));
+        },
+        1000
+    );
+}
+
+function validateEmail() {
+    setTimeout(function () {
+            markValidation(emailInput, isEmail(emailInput.value));
+        },
+        1000
+    );
+}
+
+function validateConfirmedPassword() {
     setTimeout(function () {
             const condition = arePasswordsSame(
                 confirmedPasswordInput.previousElementSibling.value,
@@ -22,11 +48,11 @@ function validatePassword() {
 }
 
 function validateCheckboxes() {
-    var form = document.querySelector('form');
+    const form = document.querySelector('form');
 
     form.addEventListener('submit', function (event) {
-        var checkboxes = document.querySelectorAll('.sport-input');
-        var checked = false;
+        const checkboxes = document.querySelectorAll('.sport-input');
+        const checked = false;
 
         checkboxes.forEach(function (checkbox) {
             if (checkbox.checked) {
@@ -42,4 +68,6 @@ function validateCheckboxes() {
 }
 
 document.addEventListener('DOMContentLoaded', validateCheckboxes);
-confirmedPasswordInput.addEventListener('keyup', validatePassword);
+emailInput.addEventListener('keyup', validateEmail);
+passwordInput.addEventListener('keyup', validatePassword);
+confirmedPasswordInput.addEventListener('keyup', validateConfirmedPassword);

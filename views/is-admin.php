@@ -3,7 +3,7 @@
 $userRepository = new UserRepository();
 $roleId = $userRepository->getRole();
 
-if ($roleId != 1) {
+if ($roleId != Role::ADMIN) {
     $url = "http://$_SERVER[HTTP_HOST]";
-    header("Location: {$url}/login");
+    header("Location: {$url}/discover");
 }

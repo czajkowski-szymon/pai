@@ -1,7 +1,7 @@
 <?php
 
 require_once 'AppController.php';
-require_once __DIR__.'/../repositories/UserRepository.php';
+require_once __DIR__.'/../repository/UserRepository.php';
 
 class UserController extends AppController {
     private UserRepository $userRepository;
@@ -26,13 +26,13 @@ class UserController extends AppController {
     }
 
     public function like(int $userId) {
-        $ratingUserId = $this->userRepository->getUserByUsername($_COOKIE['username'])->getUserId();
+        $ratingUserId = $this->userRepository->getUserByEmail($_COOKIE['username'])->getUserId();
         http_response_code(200);
         echo json_encode($this->userRepository->like($userId, $ratingUserId));
     }
 
     public function dislike(int $userId) {
-        $ratingUserId = $this->userRepository->getUserByUsername($_COOKIE['username'])->getUserId();
+        $ratingUserId = $this->userRepository->getUserByEmail($_COOKIE['username'])->getUserId();
         http_response_code(200);
         echo json_encode($this->userRepository->dislike($userId, $ratingUserId));
     }

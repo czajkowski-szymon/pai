@@ -12,8 +12,8 @@ function like() {
     ).then(function (response) {
         return response.json();
     }).then(function(response) {
-        likes.innerHTML = parseInt(response.likes);
-        dislikes.innerHTML = parseInt(response.dislikes);
+        likes.innerHTML = " " + parseInt(response.likes);
+        dislikes.innerHTML = " " + parseInt(response.dislikes);
     });
 }
 
@@ -28,8 +28,8 @@ function dislike() {
     ).then(function (response) {
         return response.json();
     }).then(function(response) {
-        likes.innerHTML = parseInt(response.likes);
-        dislikes.innerHTML = parseInt(response.dislikes);
+        likes.innerHTML = " " + parseInt(response.likes);
+        dislikes.innerHTML = " " + parseInt(response.dislikes);
     });
 }
 

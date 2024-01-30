@@ -1,8 +1,8 @@
 <?php
 
 require_once 'AppController.php';
-require_once __DIR__.'/../repositories/TrainingRepository.php';
-require_once __DIR__.'/../repositories/UserRepository.php';
+require_once __DIR__.'/../repository/TrainingRepository.php';
+require_once __DIR__.'/../repository/UserRepository.php';
 
 class TrainingController extends AppController {
     private TrainingRepository $trainingRepository;
@@ -15,45 +15,47 @@ class TrainingController extends AppController {
     }
 
     public function arrangeTraining() {
-        if (!$this->isPost()) {
-            return $this->render('dicover');
-        }
-
-        $invitedUserId = $_POST['user-id'];
-        $invitingUserUsername = $_COOKIE['username'];
-        
-        $invitingUser = $this->userRepository->getUserByUsername($invitingUserUsername);
-        $invitedUser = $this->userRepository->getUserById($invitedUserId);
-
-        $date = new DateTime($_POST['training-date']);
-        $training = new Training($invitingUser, $invitedUser, $date, false);
-
-        $this->trainingRepository->addTraining($training);
-
-        $url = "http://$_SERVER[HTTP_HOST]";
-        header("Location: {$url}/discover");
-    }
-
-    public function acceptInvite() {
-        // if (!$this->isPost()) {
-        //     return $this->render('dicover');
-        // }
-        
         $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
-
+        
         if ($contentType === "application/json") {
             $content = trim(file_get_contents("php://input"));
             $decoded = json_decode($content, true);
 
             header('Content-type: application/json');
-            http_response_code(200);
+            
+            $invitingUserEmail = $_COOKIE['username'];
+            $invitedUserId = $decoded['userId'];
 
-            echo json_encode($this->trainingRepository->acceptTraining($decoded['id']));
+            $invitingUser = $this->userRepository->getUserByEmail($invitingUserEmail);
+            $invitedUser = $this->userRepository->getUserById($invitedUserId);
+
+            $date = new DateTime($decoded['date']);
+            $training = new Training($invitingUser, $invitedUser, $date, false);
+            
+            $this->trainingRepository->addTraining($training);
+            http_response_code(200);
+        }
+    }
+
+    public function acceptInvite() {
+        if (!$this->isPost()) {
+            return $this->render('profile');
         }
 
-        // $this->trainingRepository->acceptTraining($_POST['training-id']);
+        $this->trainingRepository->acceptTraining($_POST['training-id']);
 
-        // $url = "http://$_SERVER[HTTP_HOST]";
-        // header("Location: {$url}/profile");
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/profile");
+    }
+
+    public function deleteInvite() {
+        if (!$this->isPost()) {
+            return $this->render('profile');
+        }
+
+        $this->trainingRepository->deleteTraining($_POST['training-id']);
+
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/profile");
     }
 }

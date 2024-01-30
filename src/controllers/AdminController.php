@@ -1,7 +1,7 @@
 <?php
 
 require_once 'AppController.php';
-require_once __DIR__.'/../repositories/UserRepository.php';
+require_once __DIR__.'/../repository/UserRepository.php';
 
 class AdminController extends AppController {
 
@@ -14,8 +14,7 @@ class AdminController extends AppController {
 
     public function adminpanel() {
         return $this->render(
-            'admin-panel',
-            ['users' => $this->userRepository->getUsersForDiscover()]
+            'admin-panel', ['users' => $this->userRepository->getUsersForDiscover()]
         );
     }   
 
@@ -24,7 +23,7 @@ class AdminController extends AppController {
             return $this->render('admin-panel');
         }
 
-        $userId = $_POST['user_id'];
+        $userId = $_POST['user-id'];
 
         $this->userRepository->deleteUser($userId);
 

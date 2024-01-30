@@ -2,7 +2,7 @@
 
 class User {
     private int $userId;
-    private string $username;
+    private string $email;
     private string $password;
     private string $firstName;
     private string $photoUrl;
@@ -12,12 +12,12 @@ class User {
     private int $likes;
     private int $dislikes;
 
-    public function __construct(string $username,
+    public function __construct(string $email,
                                 string $firstName,
                                 string $photoUrl,
                                 string $bio,
                                 City $city) {
-        $this->username = $username;
+        $this->email = $email;
         $this->firstName = $firstName;
         $this->photoUrl = $photoUrl;
         $this->bio = $bio;
@@ -32,12 +32,12 @@ class User {
         $this->userId = $userId;
     }
 
-    public function getUsername(): string {
-        return $this->username;
+    public function getEmail(): string {
+        return $this->email;
     }
 
-    public function setUsername(string $username): void {
-        $this->username = $username;
+    public function setEmail(string $email): void {
+        $this->email = $email;
     }
 
     public function getFirstName(): string {
@@ -102,19 +102,5 @@ class User {
 
     public function setDislikes(int $dislikes): void {
         $this->dislikes = $dislikes;
-    }
-
-
-    public function addSport(Sport $sport): void {
-        $this->sports[] = $sport;
-    }
-
-    public function hasSport(int $sportId): bool {
-        foreach ($this->sports as $sport) {
-            if ($sport->getSportId() === $sportId) {
-                return true;
-            }
-        }
-        return false;
     }
 }

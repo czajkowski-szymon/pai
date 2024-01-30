@@ -45,6 +45,12 @@ function createProfile(profile) {
     const bio = clone.querySelector("#bio");
     bio.innerHTML = profile.bio;
 
+    const likes = clone.querySelector("#likes");
+    likes.innerHTML = " " + profile.likes;
+
+    const dislikes = clone.querySelector("#dislikes");
+    dislikes.innerHTML = " " + profile.dislikes;
+
     const sportList = clone.querySelector("ul");
     const sportNames = profile.sport_names.replace(/\s/g, '').split(',');
 

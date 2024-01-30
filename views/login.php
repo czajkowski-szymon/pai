@@ -16,7 +16,7 @@
         </div>
         <div class="login-container">
             <form action="login" class="login" method="POST">
-                <input name="username" type="username" placeholder="Username">
+                <input name="email" type="email" placeholder="Email">
                 <input name="password" type="password" placeholder="Password">
                 <div class="message">
                     <?php

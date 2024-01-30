@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <div class="header-box">
-            <p class="header">TRAINING BUDDY</p>
+            <p class="header">CREATE ACCOUNT</p>
             <div class="logo">
                 <img src="../public/img/logo.svg" alt="Two people running">
             </div>
@@ -26,11 +26,11 @@
                         }
                     ?>
                 </div>
-                <input name="username" type="text" placeholder="Username" required>
+                <input name="email" type="email" placeholder="Email" required>
                 <input name="password" type="password" placeholder="Password" required>
                 <input name="confirmedPassword" type="password" placeholder="Confirm Password" required>
                 <input name="first-name" type="text" placeholder="First Name" required>
-                <textarea name="bio" rows="5" cols="50" placeholder="Bio" required></textarea>
+                <textarea name="bio" rows="5" cols="50" placeholder="Bio" maxlength="75" required></textarea>
                 <label for="profile-photo">Profile photo</label>
                 <input if="profile-photo" type="file" name="file" required>
                 <select name="city">
