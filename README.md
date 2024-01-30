@@ -6,7 +6,7 @@
 
 - [About](#about)
 - [Technologies](#technologies)
-- [Features](#technologies)
+- [Features](#features)
 - [Screenchots](#screenshots)
 - [Instructions](#instructions)
 
@@ -55,4 +55,4 @@ This web application allows you to create an account and find people for trainin
 
 1. Download project
 2. Run `docker-compose up` in main directory
-3. After that run website in your browser. Type `localhost:8080` in searchbar
+3. After that run website in your browser and type `localhost:8080` in searchbar
